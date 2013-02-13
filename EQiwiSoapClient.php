@@ -1,6 +1,7 @@
 <?php
 
 Yii::setPathOfAlias('qiwi-soap', __DIR__);
+Yii::import('qiwi-soap.*');
 Yii::import('qiwi-soap.models.*');
 
 class EQiwiSoapClient extends SoapClient {
@@ -64,7 +65,7 @@ class EQiwiSoapClient extends SoapClient {
 	/**
 	 * @param EQiwiCancelBillRequest $request
 	 * @return bool
-	 * @throws CQiwiSoapException
+	 * @throws EQiwiSoapException
 	 */
 	public function cancelBill(EQiwiCancelBillRequest $request) {
 		/** @var $response EQiwiCancelBillResponse */
@@ -76,7 +77,7 @@ class EQiwiSoapClient extends SoapClient {
 		$this->logRequest();
 
 		if (!EQiwiHelper::isSuccessResponse($response->cancelBillResult)) {
-			throw new CQiwiSoapException(EQiwiHelper::getResponseMesssageByCode($response->cancelBillResult), $response->cancelBillResult);
+			throw new EQiwiSoapException(EQiwiHelper::getResponseMesssageByCode($response->cancelBillResult), $response->cancelBillResult);
 		}
 
 		return true;
@@ -85,7 +86,7 @@ class EQiwiSoapClient extends SoapClient {
 	/**
 	 * @param EQiwiCreateBillRequest $request
 	 * @return bool
-	 * @throws CQiwiSoapException
+	 * @throws EQiwiSoapException
 	 */
 	public function createBill(EQiwiCreateBillRequest $request) {
 		/** @var $response EQiwiCreateBillResponse */
@@ -97,7 +98,7 @@ class EQiwiSoapClient extends SoapClient {
 		$this->logRequest();
 
 		if (!EQiwiHelper::isSuccessResponse($response->createBillResult)) {
-			throw new CQiwiSoapException(EQiwiHelper::getResponseMesssageByCode($response->createBillResult), $response->createBillResult);
+			throw new EQiwiSoapException(EQiwiHelper::getResponseMesssageByCode($response->createBillResult), $response->createBillResult);
 		}
 
 		return true;
@@ -108,8 +109,4 @@ class EQiwiSoapClient extends SoapClient {
 			Yii::app()->request->hostInfo .
 			Yii::app()->assetManager->publish(Yii::getPathOfAlias('qiwi-soap.wsdl') . '/IShopServerWS.wsdl');
 	}
-}
-
-class CQiwiSoapException extends CException {
-
 }
