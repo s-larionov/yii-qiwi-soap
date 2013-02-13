@@ -37,7 +37,7 @@ class EQiwiCreateBillRequest {
 	 *                            Для магазинов, зарегистрированных по схеме "Прием платежей", уведомления заблокированы
 	 * @param boolean $create     Флаг для создания нового пользователя (если он не зарегистрирован в системе)
 	 */
-	function __construct($login, $password, $user, $amount, $txn, $comment, $lifetime = null, $alarm = self::ALARM_SMS, $create = true) {
+	function __construct($login, $password, $user, $amount, $txn, $comment, $lifetime = null, $alarm = self::ALARM_NONE, $create = true) {
 		$this->alarm    = $alarm;
 		$this->amount   = number_format($amount, 2, '.', '');
 		$this->comment  = $comment;
