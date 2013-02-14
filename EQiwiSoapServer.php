@@ -8,8 +8,8 @@ Yii::import('qiwi-soap.models.*');
 class EQiwiSoapServer extends SoapServer {
 
 	private static $classMap = array(
-		'tns:updateBill'         => 'EQiwiInUpdateBillRequest',
-		'tns:updateBillResponse' => 'EQiwiInUpdateBillResponse',
+		'updateBill'         => 'EQiwiInUpdateBillRequest',
+		'updateBillResponse' => 'EQiwiInUpdateBillResponse',
 	);
 
 	function __construct($handlerClass, array $options = array()) {
@@ -25,7 +25,6 @@ class EQiwiSoapServer extends SoapServer {
 				$options['classmap'][$key] = $value;
 			}
 		}
-		$options['trace'] = 1;
 		parent::SoapServer($this->getWsdlUrl(), $options);
 
 		$this->setClass($handlerClass);
